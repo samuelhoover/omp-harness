@@ -20,7 +20,7 @@ Not included (machine-local by design): credentials (~/.omp/agent/agent.db), ses
 
 Prerequisites: omp installed, git identity set, DEEPSEEK_API_KEY in the environment.
 
-    git clone git@github.com:samuelhoover/harness.git ~/harness
+    git clone https://github.com/samuelhoover/omp-harness.git ~/harness
     ~/harness/omp/install.sh
 
 Safe to re-run anytime — it re-points symlinks and never touches files it didn't create.
