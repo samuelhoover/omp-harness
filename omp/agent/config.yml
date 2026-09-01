@@ -1,0 +1,61 @@
+setupVersion: 2
+modelRoles:
+  default: deepseek/deepseek-v4-flash:max
+  tiny: deepseek/deepseek-v4-flash:max
+  smol: deepseek/deepseek-v4-flash:max
+  slow: deepseek/deepseek-v4-flash:max
+  task: deepseek/deepseek-v4-flash:max
+  commit: deepseek/deepseek-v4-flash:max
+defaultThinkingLevel: max
+terminal:
+  showProgress: true
+display:
+  cacheMissMarker: true
+advisor:
+  enabled: false
+astGrep:
+  enabled: true
+statusLine:
+  preset: custom
+  separator: powerline-thin
+  sessionAccent: true
+  transparent: false
+  leftSegments:
+    - model
+    - mode
+    - path
+    - git
+    - subagents
+  rightSegments:
+    - context_pct
+    - cost
+    - cache_hit
+    - token_total
+    - session_name
+  segmentOptions:
+    model:
+      showThinkingLevel: true
+    path:
+      abbreviate: true
+      maxLength: 24
+      stripWorkPrefix: true
+    git:
+      showBranch: true
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true
+  compactThinkingLevel: false
+  showHookStatus: true
+task:
+  maxConcurrency: 2
+autolearn:
+  enabled: true
+  autoContinue: false
+  minToolCalls: 20
+secrets:
+  enabled: true
+autoResume: true
+checkpoint:
+  enabled: true
+github:
+  enabled: true

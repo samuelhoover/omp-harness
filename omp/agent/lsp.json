@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "basedpyright": {
+      "rootMarkers": ["*.py", "pyproject.toml", "basedpyright.toml", "pyrightconfig.json", "setup.py", "setup.cfg", "requirements.txt", "Pipfile"]
+    },
+    "ruff": {
+      "rootMarkers": ["*.py", "pyproject.toml", "ruff.toml", ".ruff.toml"]
+    },
+    "rust-analyzer": {
+      "rootMarkers": ["*.rs", "Cargo.toml"]
+    }
+  }
+}
