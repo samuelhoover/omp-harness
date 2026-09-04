@@ -5,3 +5,5 @@ Prefer the standard library; name why it fails before adding a dependency.
 One line of rationale per non-obvious decision.
 Smallest useful slice first; show it; continue only on explicit go.
 Git commit messages follow Conventional Commits (type(scope): summary).
+Ask before committing: show the diff and wait for an explicit go.
+Never push — only the user pushes.
