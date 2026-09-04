@@ -4,6 +4,8 @@ My omp agent configuration: settings, context files, tool-scoped rules, one skil
 
 ## Contents
 
+    WISHLIST.md             living wishlist: omp usability asks, ranked by my workflow needs
+
     omp/agent/config.yml    settings (modelRoles, statusLine, task, advisor off, …)
     omp/agent/AGENTS.md     behavioral guidelines
     omp/agent/RULES.md      generic one-line rules (union-merged on pull)
