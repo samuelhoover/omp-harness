@@ -36,3 +36,19 @@ For multi-step tasks, state a brief plan, with clear steps and verification chec
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 Speak up when success criteria are weak — tighten them before starting.
+
+## 4. Standard Library First
+- Reuse order: helpers already in the codebase → standard library → dependencies already installed → a new dependency, only when the stdlib provably can't do the job.
+- Adding any dependency requires one line stating why the standard library fails. One-off scripts and utilities ship with zero dependencies.
+- No speculative flexibility: no interface with one implementation, no factory for one product, no config for a value that never changes.
+
+## 5. Explain Decisions in One Line Each
+- After any non-obvious choice, give one line of rationale: why this approach, what was deliberately skipped.
+- Keep explanations shorter than the code they describe. No prose walls, no feature tours.
+
+## 6. Disposable Utilities
+For scripts, data munging, and one-off tools — the common delegation case:
+1. Restate the task's constraint line before writing: language, stdlib-only unless waived, one file where possible, no new dependencies.
+2. Match style: if the task touches existing code, read the relevant files first and follow their conventions; otherwise state your assumptions about conventions before writing.
+3. Smallest useful slice first: a working 10-line script beats a designed 200-line tool. Deliver the slice, wait for an explicit go, then continue.
+4. Deliver one reviewable step at a time — show the first result before chaining more work onto it. No "while you're at it".
