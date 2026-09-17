@@ -1,11 +1,12 @@
 setupVersion: 2
 modelRoles:
-  default: deepseek/deepseek-v4-flash:max
-  tiny: deepseek/deepseek-v4-flash:max
-  smol: deepseek/deepseek-v4-flash:max
-  slow: deepseek/deepseek-v4-flash:max
-  task: deepseek/deepseek-v4-flash:max
-  commit: deepseek/deepseek-v4-flash:max
+  tiny: deepseek/deepseek-flash:low
+  smol: deepseek/deepseek-flash:low
+  task: deepseek/deepseek-flash:high
+  commit: deepseek/deepseek-flash:low
+  advisor: deepseek/deepseek-flash:max
+  default: deepseek/deepseek-flash:max
+  slow: deepseek/deepseek-flash:max
 defaultThinkingLevel: max
 terminal:
   showProgress: true
@@ -48,6 +49,10 @@ statusLine:
   showHookStatus: true
 task:
   maxConcurrency: 2
+  agentAdvisor:
+    {}
+  agentModelOverrides:
+    {}
 autolearn:
   enabled: true
   autoContinue: false
@@ -59,3 +64,8 @@ checkpoint:
   enabled: true
 github:
   enabled: true
+hideThinkingBlock: false
+cycleOrder:
+  - smol
+  - default
+  - slow
