@@ -19,7 +19,7 @@
 #   OMP_LAUNCH_DELAY    seconds before the draft is typed (default 3)
 #   OMP_LAUNCH_CWD      pane working directory (default: current directory)
 #   OMP_LAUNCH_TMUX     tmux command prefix (testing hook)
-#   OMP_LAUNCH_TARGET   explicit tmux target for the new pane (testing hook)
+#   OMP_LAUNCH_TARGET   override the split target (default: the invoking pane)
 #   OMP_LAUNCH_CMD      pane command for task mode; %s = draft file path
 #   OMP_LAUNCH_OMP      omp binary for draft mode (testing hook)
 set -euo pipefail
@@ -71,7 +71,12 @@ case "${OMP_LAUNCH_SPLIT:-h}" in
 esac
 
 tgt=()
-[ -n "${OMP_LAUNCH_TARGET:-}" ] && tgt=(-t "$OMP_LAUNCH_TARGET")
+if [ -n "${OMP_LAUNCH_TARGET:-}" ]; then
+  tgt=(-t "$OMP_LAUNCH_TARGET")
+elif [ -n "${TMUX_PANE:-}" ]; then
+  # split the pane this command was invoked from — no current-window guessing
+  tgt=(-t "$TMUX_PANE")
+fi
 
 if [ -n "$task" ]; then
   # fire-and-go: message via @file, constraints + pointer attached
