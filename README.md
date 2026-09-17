@@ -40,24 +40,36 @@ Pull on other machines: `git pull && ~/harness/omp/install.sh`.
 
 `omp/launch.sh` opens an omp session in a tmux pane beside nvim, pointed at the
 current directory, with buffer context and code-quality constraints preloaded.
-Run inside tmux. Neovim (`~/.config/nvim/init.lua`):
+Run inside tmux. Neovim (e.g. `~/.config/nvim/lua/config/keymaps.lua` on LazyVim):
 
 ```lua
 local launcher = vim.fn.expand('~/harness/omp/launch.sh')
 
+-- run the launcher; surface failures instead of failing silently
+local function launch_omp(extra, input)
+  local cmd = ('%s --file %s %s 2>&1'):format(
+    vim.fn.shellescape(launcher),
+    vim.fn.shellescape(vim.fn.expand('%:p')),
+    extra or ''
+  )
+  local out = input and vim.fn.system(cmd, input) or vim.fn.system(cmd)
+  if vim.v.shell_error ~= 0 then
+    vim.notify(out, vim.log.levels.ERROR)
+  end
+end
+
 -- normal: pane opens, constraint draft typed in — append a task, press Enter
 vim.keymap.set('n', '<leader>a', function()
-  vim.fn.system({ launcher, '--file', vim.fn.expand('%:p') })
+  launch_omp()
 end, { silent = true, desc = 'omp: launch agent pane' })
 
 -- visual: selection becomes the task; the agent starts immediately
 vim.keymap.set('x', '<leader>a', function()
   local a, b = vim.fn.line('v'), vim.fn.line('.')
-  if a > b then a, b = b, a end
-  vim.fn.system(
-    { launcher, '--file', vim.fn.expand('%:p'), '--lines', a .. '-' .. b },
-    vim.fn.getline(a, b)
-  )
+  if a > b then
+    a, b = b, a
+  end
+  launch_omp(('--lines %d-%d'):format(a, b), vim.fn.getline(a, b))
 end, { silent = true, desc = 'omp: launch agent with selection' })
 ```
 
