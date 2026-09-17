@@ -40,12 +40,31 @@ Pull on other machines: `git pull && ~/harness/omp/install.sh`.
 
 `omp/launch.sh` opens an omp session in a tmux pane beside nvim, pointed at the
 current directory, with buffer context and code-quality constraints preloaded.
-Run inside tmux. Add to `~/.config/nvim/init.lua` (or wherever mappings live):
+Run inside tmux. Neovim (`~/.config/nvim/init.lua`):
+
+```lua
+local launcher = vim.fn.expand('~/harness/omp/launch.sh')
+
+-- normal: pane opens, constraint draft typed in — append a task, press Enter
+vim.keymap.set('n', '<leader>a', function()
+  vim.fn.system({ launcher, '--file', vim.fn.expand('%:p') })
+end, { silent = true, desc = 'omp: launch agent pane' })
+
+-- visual: selection becomes the task; the agent starts immediately
+vim.keymap.set('x', '<leader>a', function()
+  local a, b = vim.fn.line('v'), vim.fn.line('.')
+  if a > b then a, b = b, a end
+  vim.fn.system(
+    { launcher, '--file', vim.fn.expand('%:p'), '--lines', a .. '-' .. b },
+    vim.fn.getline(a, b)
+  )
+end, { silent = true, desc = 'omp: launch agent with selection' })
+```
+
+Vim (`~/.vimrc`):
 
 ```vim
-" normal: pane opens, constraint draft typed in — append a task, press Enter
 nnoremap <silent> <leader>a :call system('~/harness/omp/launch.sh --file ' . shellescape(expand('%:p')))<CR>
-" visual: selection becomes the task; the agent starts immediately
 vnoremap <silent> <leader>a :<C-u>call system('~/harness/omp/launch.sh --file ' . shellescape(expand('%:p')) . ' --lines ' . line("'<") . '-' . line("'>"), join(getline("'<", "'>"), "\n"))<CR>
 ```
 
