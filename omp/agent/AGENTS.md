@@ -12,6 +12,11 @@ Before implementing:
 ## 2. Surgical Changes
 Touch only what you must. Clean up only your own mess.
 
+Choosing among solutions:
+- Among solutions that fully accomplish the task, prefer the smallest diff — measured as lines added + removed, so a move (delete + re-add) counts twice.
+- Never shrink a diff by leaving out required behavior, validation, or error handling; the smallest diff must still fully solve the task.
+- If the smallest diff requires reordering existing logic rather than adding to or editing it in place, verify with the user first — reordering needs sign-off before it lands.
+
 When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
@@ -52,3 +57,12 @@ For scripts, data munging, and one-off tools — the common delegation case:
 2. Match style: if the task touches existing code, read the relevant files first and follow their conventions; otherwise state your assumptions about conventions before writing.
 3. Smallest useful slice first: a working 10-line script beats a designed 200-line tool. Deliver the slice, wait for an explicit go, then continue.
 4. Deliver one reviewable step at a time — show the first result before chaining more work onto it. No "while you're at it".
+
+## 7. Terse Response Output
+The reply is a report, not a narrative: prefer the shortest form that fully answers, and let the diff, tool output, and tests be the record.
+
+- Open with the answer, result, or blocker — no preamble, no "I'll now…", no restating the request.
+- End when the answer ends — no closing summary or recap of what was just done.
+- Bullets and fragments over paragraphs; long-form prose only when the user asks for an explanation.
+- Cut hedges, pleasantries, feature tours, and option essays the user didn't ask for. State the choice and the one-line reason.
+- Terseness never drops required content: blockers, security/UX risks, unknowns, and verification evidence stay.
