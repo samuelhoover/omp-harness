@@ -11,7 +11,7 @@ My omp agent configuration: settings, context files, tool-scoped rules, one skil
     omp/agent/RULES.md      generic one-line rules (union-merged on pull)
     omp/agent/models.yml    deepseek provider definition (API key from DEEPSEEK_API_KEY env)
     omp/agent/lsp.json      LSP overrides (basedpyright, ruff, rust-analyzer)
-    omp/agent/rules/        tool-scoped rules (no-browser, no-secrets)
+    omp/agent/rules/        tool-scoped rules (no-browser, no-secrets, py-basedpyright)
     omp/agent/skills/       skills (research)
     omp/launch.sh           nvim→tmux launcher: agent pane with buffer context + constraints preloaded
     omp/install.sh          idempotent installer / re-linker
