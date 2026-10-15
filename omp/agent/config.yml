@@ -64,7 +64,7 @@ checkpoint:
   enabled: true
 github:
   enabled: true
-hideThinkingBlock: false
+hideThinkingBlock: true
 cycleOrder:
   - smol
   - default
