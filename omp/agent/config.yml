@@ -1,4 +1,8 @@
 setupVersion: 2
+bash:
+  patterns:
+    - match: "git push*"
+      approval: deny
 modelRoles:
   tiny: deepseek/deepseek-flash:low
   smol: deepseek/deepseek-flash:low
