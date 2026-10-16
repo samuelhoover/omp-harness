@@ -88,3 +88,8 @@ the agent reads and matches your code before writing. Useful knobs (env):
 | `OMP_LAUNCH_PRELUDE` | stdlib-first, one file, no new deps, smallest useful slice first… | constraint sentence |
 | `OMP_LAUNCH_SPLIT` | `h` | pane placement: `h` beside, `v` below, `w` new window |
 | `OMP_LAUNCH_DELAY` | `3` | seconds to wait before typing the draft (raise if omp boots slowly) |
+| `OMP_LAUNCH_CWD` | current directory | pane working directory |
+| `OMP_LAUNCH_TMUX` | `tmux` | tmux command prefix (testing hook) |
+| `OMP_LAUNCH_TARGET` | the invoking pane | override the split target |
+| `OMP_LAUNCH_CMD` | `omp @%s` | pane command in task mode; `%s` = draft file path |
+| `OMP_LAUNCH_OMP` | `omp` | omp binary for draft mode (testing hook) |
