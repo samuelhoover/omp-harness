@@ -1,6 +1,6 @@
 ---
 name: research
-description: Use this skill when the user wants to inventory existing solutions, libraries, papers, or prior art related to a problem. Triggers on phrases like "is there a library for...", "how do people usually solve...", "what's the standard approach to...", "what's been written about...", "find prior art for...". Spawns a subagent to do the actual searching, then returns a structured inventory. Does NOT recommend, rank, or pick winners — for that, defer to the approach-eval skill.
+description: Use this skill when the user wants to inventory existing solutions, libraries, papers, or prior art related to a problem. Triggers on phrases like "is there a library for...", "how do people usually solve...", "what's the standard approach to...", "what's been written about...", "find prior art for...". Spawns a subagent to do the actual searching, then returns a structured inventory. Does NOT recommend, rank, or pick winners.
 ---
 
 # Research: prior-art inventory
@@ -9,15 +9,15 @@ Your job is to inventory what already exists for the problem the user described.
 
 ## Step 1 — Establish scope
 
-Read the project's `CLAUDE.md` at the repo root for stack, conventions, and constraints. If `CLAUDE.md` is missing or doesn't cover the relevant area, ask one targeted clarifying question (stack + version + hard constraints) and wait for an answer before proceeding.
+The project's stack, conventions, and constraints are already in your context: `AGENTS.md` is discovered and injected automatically (see the auto-loaded `<repo-rules>` block), so do not go looking for it. If that context does not cover the relevant area, ask one targeted clarifying question (stack + version + hard constraints) and wait for an answer before proceeding.
 
-## Step 2 — Delegate to a research subagent
+## Step 2 — Delegate to a scout subagent
 
-Spawn an Explore subagent with this brief. The subagent does the searching; you only see its structured return value.
+Spawn a `scout` subagent (the read-only research agent) with this brief. The subagent does the searching; you only see its structured return value.
 
 > Inventory prior art for: `<problem statement>`.
-> Project stack: `<stack from CLAUDE.md>`.
-> Hard constraints: `<constraints from CLAUDE.md>`.
+> Project stack: `<stack from the project context>`.
+> Hard constraints: `<constraints from the project context>`.
 > Budget: at most 6 total searches across all sources combined. Prefer 1-2 broad searches over many narrow ones. Stop early if you have 5+ candidates with maintenance signals. Do not chase completeness — return what you have when the cap is reached, with a footnote naming what was skipped.
 >
 > Search across:
