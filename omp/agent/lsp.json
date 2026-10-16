@@ -7,7 +7,7 @@
       "rootMarkers": ["*.py", "pyproject.toml", "ruff.toml", ".ruff.toml"]
     },
     "rust-analyzer": {
-      "rootMarkers": ["*.rs", "Cargo.toml"]
+      "rootMarkers": ["*.rs", "Cargo.toml", "rust-analyzer.toml"]
     }
   }
 }
