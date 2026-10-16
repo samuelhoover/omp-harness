@@ -52,6 +52,10 @@ fi
 [ -n "${TMUX:-}" ] || { echo "launch.sh: not running inside tmux" >&2; exit 2; }
 tmux_cmd() { ${OMP_LAUNCH_TMUX:-tmux} "$@"; }
 
+# omp reads a draft once at pane start, so a day-old one is spent; the trailing
+# slash makes find descend through macOS's /tmp -> /private/tmp symlink
+find /tmp/ -maxdepth 1 -name 'omp-draft.*' -mtime +1 -delete 2>/dev/null || true
+
 cwd="${OMP_LAUNCH_CWD:-$PWD}"
 prelude="${OMP_LAUNCH_PRELUDE:-stdlib-first, one file, no new deps, smallest useful slice first. Read the referenced file and match its style before writing.}"
 
