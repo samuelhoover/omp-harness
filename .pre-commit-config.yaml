@@ -1,0 +1,10 @@
+# Local hook only — nothing is downloaded; the repo's own checker runs.
+repos:
+  - repo: local
+    hooks:
+      - id: harness-check
+        name: harness consistency checks
+        entry: ./omp/check.sh
+        language: system
+        pass_filenames: false
+        always_run: true

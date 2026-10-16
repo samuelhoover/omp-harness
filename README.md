@@ -15,6 +15,7 @@ My omp agent configuration: settings, context files, tool-scoped rules, one skil
     omp/agent/skills/       skills (research)
     omp/launch.sh           nvim→tmux launcher: agent pane with buffer context + constraints preloaded
     omp/install.sh          idempotent installer / re-linker
+    omp/check.sh            consistency checks (pre-commit hook): knobs, settings, symlinks
 System prompt: omp built-in default — no SYSTEM.md file (kept absent on purpose).
 
 Not included (machine-local by design): credentials (~/.omp/agent/agent.db), sessions, caches, git identity.
