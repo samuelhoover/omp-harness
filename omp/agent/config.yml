@@ -3,6 +3,7 @@ bash:
   patterns:
     - match: "git push*"
       approval: deny
+  gitGuard: true
 modelRoles:
   tiny: deepseek/deepseek-flash:low
   smol: deepseek/deepseek-flash:low
