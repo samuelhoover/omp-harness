@@ -19,6 +19,16 @@ System prompt: omp built-in default — no SYSTEM.md file (kept absent on purpos
 
 Not included (machine-local by design): credentials (~/.omp/agent/agent.db), sessions, caches, git identity.
 
+## Caveats
+
+- `omp config set` rewrites `config.yml` wholesale: comments are dropped, key
+  order normalized, no trailing newline. Keep the reasoning for a setting here
+  or in WISHLIST.md, not inline in the file.
+- Managed skills (`~/.omp/agent/managed-skills`, written by autolearn) are not
+  linked by `install.sh` — they stay machine-local.
+- `lsp.json` is resolved from the native config dir and profiles through
+  `PI_CONFIG_DIR`; `PI_CODING_AGENT_DIR` does not relocate it.
+
 ## Install on a new machine
 
 Prerequisites: omp installed, git identity set, DEEPSEEK_API_KEY in the environment.
