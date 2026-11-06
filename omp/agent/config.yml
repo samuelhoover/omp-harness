@@ -1,18 +1,44 @@
-setupVersion: 2
+setupVersion: 3
 bash:
   patterns:
-    - match: "git push*"
+    - match: git push*
       approval: deny
   gitGuard: true
 modelRoles:
-  tiny: deepseek/deepseek-flash:low
-  smol: deepseek/deepseek-flash:low
-  task: deepseek/deepseek-flash:high
-  commit: deepseek/deepseek-flash:low
-  advisor: deepseek/deepseek-flash:max
-  default: deepseek/deepseek-flash:max
-  slow: deepseek/deepseek-flash:max
-defaultThinkingLevel: max
+  tiny: anthropic/claude-haiku-5-5:low
+  smol: anthropic/claude-haiku-5-5:low
+  task: anthropic/claude-sonnet-5-5:high
+  commit: anthropic/claude-haiku-5-5:low
+  advisor: anthropic/claude-opus-5-5:max
+  default: anthropic/claude-opus-5-5:xhigh
+  slow: anthropic/claude-opus-5-5:max
+  plan: anthropic/claude-opus-5-5:max
+  memory: anthropic/claude-haiku-5-5:low
+  widget: anthropic/claude-haiku-5-5:low
+defaultThinkingLevel: xhigh
+retry:
+  fallbackOn: any
+  fallbackChains:
+    default:
+      - deepseek/deepseek-v4-pro:xhigh
+    slow:
+      - deepseek/deepseek-v4-pro:xhigh
+    advisor:
+      - deepseek/deepseek-v4-pro:xhigh
+    plan:
+      - deepseek/deepseek-v4-pro:xhigh
+    task:
+      - deepseek/deepseek-v4-pro:high
+    tiny:
+      - deepseek/deepseek-flash:low
+    smol:
+      - deepseek/deepseek-flash:low
+    commit:
+      - deepseek/deepseek-flash:low
+    memory:
+      - deepseek/deepseek-flash:low
+    widget:
+      - deepseek/deepseek-flash:low
 terminal:
   showProgress: true
 display:
@@ -54,10 +80,8 @@ statusLine:
   showHookStatus: true
 task:
   maxConcurrency: 2
-  agentAdvisor:
-    {}
-  agentModelOverrides:
-    {}
+  agentAdvisor: {}
+  agentModelOverrides: {}
 autolearn:
   enabled: true
   autoContinue: false
@@ -74,3 +98,5 @@ cycleOrder:
   - smol
   - default
   - slow
+update:
+  auto: false
