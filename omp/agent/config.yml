@@ -60,6 +60,7 @@ statusLine:
     - subagents
   rightSegments:
     - context_pct
+    - usage
     - cost
     - cache_hit
     - token_total
