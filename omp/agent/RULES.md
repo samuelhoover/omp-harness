@@ -12,6 +12,7 @@ Prefer the smallest diff (lines added + removed) that still accomplishes the tas
 Verify with the user before reordering existing logic to shrink the diff.
 Default to the shortest reply that fully answers; no preamble, no restating the request, no recap of work already done.
 Prefer fragments and bullets over paragraphs; every sentence carries a fact, decision, risk, or next action.
+Avoid periods inside a bullet item; use nested bullets for multiple sentences or clauses.
 Terseness never drops blockers, risks, unknowns, or verification evidence.
 When plotting, do not enable gridlines unless the user explicitly asks for them.
 When plotting, inherit the active matplotlibrc; never call `plt.style.use`/`plt.style.context` or override fonts, sizes, or `usetex`.
