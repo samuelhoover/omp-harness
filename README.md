@@ -30,6 +30,9 @@ Not included (machine-local by design): credentials (~/.omp/agent/agent.db), ses
 - Ponytail is the upstream marketplace plugin (`ponytail@ponytail`): its state lives in
   `~/.omp/plugins` (machine-local), `install.sh` re-adds it when missing, and
   `marketplace.autoUpdate: auto` upgrades it silently at startup.
+- ASD-STE100 is the upstream marketplace plugin (`asd-ste100@asd-ste100-skill`).
+  Its `SKILL.md` sits at the repo root, which omp does not scan for plugins, so
+  `skills.customDirectories` points at the marketplace clone instead.
 - `lsp.json` is resolved from the native config dir and profiles through
   `PI_CONFIG_DIR`; `PI_CODING_AGENT_DIR` does not relocate it.
 

@@ -107,3 +107,6 @@ claudeResets:
   autoRedeem5h: "no"
 marketplace:
   autoUpdate: auto
+skills:
+  customDirectories:
+    - ~/.omp/plugins/cache/marketplaces
