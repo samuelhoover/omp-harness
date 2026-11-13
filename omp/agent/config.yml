@@ -5,12 +5,12 @@ bash:
       approval: deny
   gitGuard: true
 modelRoles:
+  default: anthropic/claude-sonnet-5-5:xhigh
   tiny: anthropic/claude-haiku-5-5:low
   smol: anthropic/claude-haiku-5-5:low
   task: anthropic/claude-sonnet-5-5:high
   commit: anthropic/claude-haiku-5-5:low
   advisor: anthropic/claude-opus-5-5:max
-  default: anthropic/claude-opus-5-5:xhigh
   slow: anthropic/claude-opus-5-5:max
   plan: anthropic/claude-opus-5-5:max
   memory: anthropic/claude-haiku-5-5:low
@@ -20,15 +20,15 @@ retry:
   fallbackOn: any
   fallbackChains:
     default:
-      - deepseek/deepseek-v4-pro:xhigh
+      - deepseek/deepseek-flash:xhigh
     slow:
-      - deepseek/deepseek-v4-pro:xhigh
+      - deepseek/deepseek-flash:xhigh
     advisor:
-      - deepseek/deepseek-v4-pro:xhigh
+      - deepseek/deepseek-flash:xhigh
     plan:
-      - deepseek/deepseek-v4-pro:xhigh
+      - deepseek/deepseek-flash:xhigh
     task:
-      - deepseek/deepseek-v4-pro:high
+      - deepseek/deepseek-flash:high
     tiny:
       - deepseek/deepseek-flash:low
     smol:
@@ -101,3 +101,8 @@ cycleOrder:
   - slow
 update:
   auto: false
+dev:
+  autoqaConsent: denied
+claudeResets:
+  autoRedeem5h: "no"
+
