@@ -68,4 +68,9 @@ drift() { # drift <dir>: warn about entries not mirrored from the repo
 }
 drift "$AGENT/skills"
 drift "$AGENT/rules"
+# marketplace plugins live in ~/.omp/plugins (machine-local): re-add ponytail on a fresh machine
+if command -v omp >/dev/null 2>&1; then
+  [[ "$(omp plugin marketplace list)" == *DietrichGebert/ponytail* ]] || omp plugin marketplace add DietrichGebert/ponytail
+  [[ "$(omp plugin list)" == *ponytail@ponytail* ]] || omp plugin install ponytail@ponytail
+fi
 echo "harness installed from $REPO"

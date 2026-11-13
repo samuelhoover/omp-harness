@@ -105,4 +105,5 @@ dev:
   autoqaConsent: denied
 claudeResets:
   autoRedeem5h: "no"
-
+marketplace:
+  autoUpdate: auto

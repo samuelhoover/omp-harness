@@ -27,6 +27,9 @@ Not included (machine-local by design): credentials (~/.omp/agent/agent.db), ses
   or in WISHLIST.md, not inline in the file.
 - Managed skills (`~/.omp/agent/managed-skills`, written by autolearn) are not
   linked by `install.sh` — they stay machine-local.
+- Ponytail is the upstream marketplace plugin (`ponytail@ponytail`): its state lives in
+  `~/.omp/plugins` (machine-local), `install.sh` re-adds it when missing, and
+  `marketplace.autoUpdate: auto` upgrades it silently at startup.
 - `lsp.json` is resolved from the native config dir and profiles through
   `PI_CONFIG_DIR`; `PI_CODING_AGENT_DIR` does not relocate it.
 
