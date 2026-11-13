@@ -110,3 +110,5 @@ marketplace:
 skills:
   customDirectories:
     - ~/.omp/plugins/cache/marketplaces
+theme:
+  dark: cendre-medium

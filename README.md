@@ -13,6 +13,7 @@ My omp agent configuration: settings, context files, tool-scoped rules, one skil
     omp/agent/lsp.json      LSP overrides (basedpyright, ruff, rust-analyzer)
     omp/agent/rules/        tool-scoped rules (no-browser, no-secrets, py-basedpyright)
     omp/agent/skills/       skills (research)
+    omp/agent/themes/       custom themes (cendre-medium, the default dark theme)
     omp/launch.sh           nvim→tmux launcher: agent pane with buffer context + constraints preloaded
     omp/install.sh          idempotent installer / re-linker
     omp/check.sh            consistency checks (pre-commit hook): knobs, settings, symlinks

@@ -51,6 +51,10 @@ for s in "$AGENT"/rules/*; do
       ;;
   esac
 done
+for s in "$REPO"/omp/agent/themes/*; do
+  [ -e "$s" ] || continue
+  link "$s" "$AGENT/themes/$(basename "$s")"
+done
 # warn about skills/rules not mirrored from the repo (machine-local drift)
 drift() { # drift <dir>: warn about entries not mirrored from the repo
   for e in "$1"/*; do
