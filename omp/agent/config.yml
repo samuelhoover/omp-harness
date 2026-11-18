@@ -112,3 +112,5 @@ skills:
     - ~/.omp/plugins/cache/marketplaces
 theme:
   dark: cendre-medium
+composer:
+  shape: pi
