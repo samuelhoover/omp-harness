@@ -1,17 +1,19 @@
 # harness
 
-My omp agent configuration: settings, context files, tool-scoped rules, one skill. Everything is symlinked from `~/.omp/agent` so edits made through omp (e.g. `omp config set`) land in this repo — `git diff` shows config drift.
+My omp agent configuration: settings, context files, tool-scoped rules, a slash command, one skill, a theme. Everything is symlinked from `~/.omp/agent` so edits made through omp (e.g. `omp config set`) land in this repo — `git diff` shows config drift.
 
 ## Contents
 
     WISHLIST.md             living wishlist: omp usability asks, ranked by my workflow needs
+    CHANGELOG.md            what changed in this repo (Keep a Changelog; dated, no versions)
 
     omp/agent/config.yml    settings (modelRoles, statusLine, task, advisor off, …)
     omp/agent/AGENTS.md     behavioral guidelines
     omp/agent/RULES.md      generic one-line rules (union-merged on pull)
     omp/agent/models.yml    deepseek provider definition (API key from DEEPSEEK_API_KEY env)
     omp/agent/lsp.json      LSP overrides (basedpyright, ruff, rust-analyzer)
-    omp/agent/rules/        tool-scoped rules (no-browser, no-secrets, py-basedpyright)
+    omp/agent/rules/        tool-scoped rules (no-browser, no-secrets, py-basedpyright, conventional-commit-style)
+    omp/agent/commands/     slash commands (/cc: omp commit protocol, strict Conventional Commits)
     omp/agent/skills/       skills (research)
     omp/agent/themes/       custom themes (cendre-medium, the default dark theme)
     omp/launch.sh           nvim→tmux launcher: agent pane with buffer context + constraints preloaded
@@ -36,6 +38,8 @@ Not included (machine-local by design): credentials (~/.omp/agent/agent.db), ses
   `skills.customDirectories` points at the marketplace clone instead.
 - `lsp.json` is resolved from the native config dir and profiles through
   `PI_CONFIG_DIR`; `PI_CODING_AGENT_DIR` does not relocate it.
+- The bash tool refuses `git push*` (`bash.patterns`) and `bash.gitGuard` is on;
+  pushes happen from your own shell.
 
 ## Install on a new machine
 
@@ -53,6 +57,27 @@ Edits made through omp (config set, rules, skills) write through the symlinks in
     cd ~/harness && git add -A && git commit -m "…" && git push
 
 Pull on other machines: `git pull && ~/harness/omp/install.sh`.
+
+## Committing from a session
+
+`/cc [--dry-run] [--no-changelog] [context]` commits what the session changed. It
+follows the `omp commit` protocol (select, analyze, changelog, message,
+validate) with strict Conventional Commits 1.0.0: imperative present-tense
+lowercase description, no trailing periods. It previews the message and waits
+for a go before committing; `--dry-run` writes nothing. omp discovers commands
+at session start, so open a new session after `install.sh`. This repo has a
+`CHANGELOG.md`, so `/cc` adds entries under its `[Unreleased]` section.
+
+- `/commit` is a built-in dispatched before file commands, so a file named
+  `commit.md` never runs — hence `/cc`.
+- `omp commit` (the CLI) is out of scope: its validator requires past-tense
+  summaries and periods on detail bullets, which contradicts the rules here.
+- The `conventional-commit-style` rule fires on `d.commit(` and `git commit`
+  - it interrupts the first attempt of each turn and injects the format
+  - the retry is exempt, so it is a reminder, not a content check
+  - even a compliant commit is interrupted once
+- Commit attribution needs a persisted session: runs with `--no-session` report
+  the session's own edits as "Not yours".
 
 ## Agent launch glue (nvim → tmux)
 
