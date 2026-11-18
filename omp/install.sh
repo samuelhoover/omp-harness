@@ -51,6 +51,19 @@ for s in "$AGENT"/rules/*; do
       ;;
   esac
 done
+for s in "$REPO"/omp/agent/commands/*; do
+  [ -e "$s" ] || continue
+  link "$s" "$AGENT/commands/$(basename "$s")"
+done
+# drop links to commands that no longer exist in the repo (ours, dangling only)
+for s in "$AGENT"/commands/*; do
+  [ -L "$s" ] || continue
+  case "$(readlink "$s")" in
+    "$REPO"/*)
+      [ -e "$s" ] || { rm -f "$s"; echo "removed stale command link $s"; }
+      ;;
+  esac
+done
 for s in "$REPO"/omp/agent/themes/*; do
   [ -e "$s" ] || continue
   link "$s" "$AGENT/themes/$(basename "$s")"
@@ -72,6 +85,7 @@ drift() { # drift <dir>: warn about entries not mirrored from the repo
 }
 drift "$AGENT/skills"
 drift "$AGENT/rules"
+drift "$AGENT/commands"
 # marketplace plugins live in ~/.omp/plugins (machine-local): re-add ponytail and asd-ste100 on a fresh machine
 if command -v omp >/dev/null 2>&1; then
   [[ "$(omp plugin marketplace list)" == *DietrichGebert/ponytail* ]] || omp plugin marketplace add DietrichGebert/ponytail

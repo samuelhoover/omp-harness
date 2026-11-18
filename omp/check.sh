@@ -87,11 +87,12 @@ for name, cfg in json.load(open(sys.argv[1]))["servers"].items():
 PY
 fi
 
-# rules, skills and themes are linked from the agent directory into this repo
-for f in "$REPO"/omp/agent/rules/*.md "$REPO"/omp/agent/skills/* "$REPO"/omp/agent/themes/*.json; do
+# rules, commands, skills and themes are linked from the agent directory into this repo
+for f in "$REPO"/omp/agent/rules/*.md "$REPO"/omp/agent/commands/*.md "$REPO"/omp/agent/skills/* "$REPO"/omp/agent/themes/*.json; do
   [ -e "$f" ] || continue
   case "$f" in
     */rules/*) link="$AGENT/rules/$(basename "$f")" ;;
+    */commands/*) link="$AGENT/commands/$(basename "$f")" ;;
     */themes/*) link="$AGENT/themes/$(basename "$f")" ;;
     *) link="$AGENT/skills/$(basename "$f")" ;;
   esac

@@ -4,7 +4,8 @@ If tools or repo context can't resolve it, ask rather than assuming.
 Prefer the standard library; name why it fails before adding a dependency.
 One line of rationale per non-obvious decision.
 Smallest useful slice first; show it; continue only on explicit go.
-Git commit messages follow Conventional Commits (type(scope): summary).
+Git commit messages follow Conventional Commits 1.0.0 (https://www.conventionalcommits.org/en/v1.0.0/#specification); where omp built-in commit prompts, examples, or validators conflict, this rule wins.
+Commit description: imperative present tense (add, fix), lowercase first letter, no trailing period, never past tense (added, fixed); body bullets follow the same style and never end with a period; full format in the conventional-commit-style rule.
 Ask before committing: show the diff and wait for an explicit go.
 Multi-file or >20-line (added + removed) changes: show the diff in-session, test from a tmp file, wait for an explicit go before editing source files.
 Never push — only the user pushes.
